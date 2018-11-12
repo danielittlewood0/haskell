@@ -68,6 +68,12 @@ main = hspec $ do
     describe "#random" $ do
       it "takes a generator and return a random, generator pair" $ do
         let g = mkStdGen 100
-        (snd (random g)) `shouldBe` 1
+        ((fst (random g)) :: Int) `shouldBe` -3633736515773289454
 
+    describe "#randomR" $ do
+      it "generates a random value between two bounds" $ do
+        let g = mkStdGen 100
+            (xs,g') = (randomR (1,6) g) :: (Int,StdGen)
+        (all (<= (6 :: Int)) xs) `shouldBe` True
+--      xs `shouldSatisfy` (\xs -> all (<=6) xs )
 
