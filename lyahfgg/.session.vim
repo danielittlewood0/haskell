@@ -17,12 +17,6 @@ nmap gx <Plug>NetrwBrowseX
 vnoremap { c{}P
 vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())
-nmap <Plug>ColorstepReload :call LoadColors()
-nmap <Plug>ColorstepPrev :call StepColorPrev()
-nmap <Plug>ColorstepNext :call StepColorNext()
-nmap <S-F7> <Plug>ColorstepReload
-nmap <F7> <Plug>ColorstepNext
-nmap <F6> <Plug>ColorstepPrev
 inoremap  u
 inoremap hh 
 inoremap jj 
@@ -44,7 +38,7 @@ set nolangremap
 set mouse=a
 set printoptions=paper:a4
 set ruler
-set runtimepath=~/.vim,~/.vim/bundle/Vundle.vim,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/vim-colorstepper,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim80,/usr/share/vim/vim80/pack/dist/opt/matchit,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.vim/bundle/Vundle.vim,~/.vim/bundle/Vundle.vim/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/vim-colorstepper/after
+set runtimepath=~/.vim,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim80,/usr/share/vim/vim80/pack/dist/opt/matchit,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after
 set shiftwidth=4
 set showcmd
 set showmatch
@@ -52,21 +46,20 @@ set smartcase
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set tabstop=4
 set undofile
-set window=38
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/haskell/lyahfgg
+cd ~/repos/haskell/lyahfgg
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +28 Chapter8.hs
-badd +0 Chapter8Spec.hs
+badd +10 Chapter9.hs
+badd +0 Chapter9Spec.hs
 argglobal
 silent! argdel *
-$argadd Chapter8.hs
-edit Chapter8.hs
+$argadd Chapter9.hs
+edit Chapter9.hs
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -193,15 +186,15 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 72 - ((31 * winheight(0) + 18) / 37)
+let s:l = 10 - ((9 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-72
-normal! 026|
+10
+normal! 030|
 wincmd w
 argglobal
-if bufexists('Chapter8Spec.hs') | buffer Chapter8Spec.hs | else | edit Chapter8Spec.hs | endif
+if bufexists('Chapter9Spec.hs') | buffer Chapter9Spec.hs | else | edit Chapter9Spec.hs | endif
 setlocal keymap=
 setlocal noarabic
 setlocal noautoindent
@@ -316,13 +309,14 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 96 - ((33 * winheight(0) + 18) / 37)
+let s:l = 71 - ((35 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-96
-normal! 049|
+71
+normal! 022|
 wincmd w
+2wincmd w
 exe 'vert 1resize ' . ((&columns * 75 + 75) / 150)
 exe 'vert 2resize ' . ((&columns * 74 + 75) / 150)
 tabnext 1

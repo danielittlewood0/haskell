@@ -94,3 +94,42 @@ main = hspec $ do
       (lockerLookup 100 lockers) `shouldBe` Left "Locker 100 is taken!"
     it "Gives you the code otherwise" $ do
       (lockerLookup 101 lockers) `shouldBe` Right "JAH3I"
+
+  describe "#treeSearch" $ do
+    it "checks whether a binary search tree contains an element" $ do
+      let nums = [8,6,4,1,7,3,5]  
+      let numsTree = foldr treeInsert EmptyTree nums  
+      (8 `treeSearch` numsTree) `shouldBe` True
+      (9 `treeSearch` numsTree) `shouldBe` False
+
+  describe "YesNo" $ do
+    it "0 is falsy and 1 is truthy" $ do
+      (yesno (0::Int)) `shouldBe` False
+      (yesno (1::Int)) `shouldBe` True
+
+    it "[] is falsy and ['a'] is truthy" $ do
+      (yesno []) `shouldBe` False
+      (yesno ['a']) `shouldBe` True
+
+    it "Nothing is falsy and Just x depends on x" $ do
+      (yesno (Nothing :: Maybe Int)) `shouldBe` False
+      (yesno (Just [])) `shouldBe` False
+      (yesno (Just (2 :: Int))) `shouldBe` True
+
+    describe "#yesnoIf" $ do 
+      it "evaluates a YesNo condition for if else" $ do
+        let f x = yesnoIf (x :: Int) 1 0
+        (yesno (1::Int)) `shouldBe` True
+        (f 1) `shouldBe` 1
+        (f 0) `shouldBe` 0
+
+  describe "Functors" $ do
+    describe "#fmap" $ do
+      it "matches map for Lists" $ do
+        (fmap (+2) [1,2,3]) `shouldBe` (map (+2) [1,2,3]) 
+
+      it "maps over Maybe" $ do
+        (fmap (+2) Nothing) `shouldBe` Nothing
+        (fmap (+2) (Just 3)) `shouldBe` Just 5
+
+
